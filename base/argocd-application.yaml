@@ -4,6 +4,7 @@ kind: Application
 metadata:
   name: monitoring-stack
   namespace: argocd
+
 spec:
   project: default
 
@@ -14,7 +15,7 @@ spec:
       helm:
         releaseName: monitoring
         valueFiles:
-          - $values/values.yaml
+          - $values/base/values.yaml
 
     - repoURL: https://github.com/Syeem007/monitoring.git
       targetRevision: main
