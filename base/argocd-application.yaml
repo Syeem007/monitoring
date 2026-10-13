@@ -1,18 +1,24 @@
+
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: monitoring-stack
+  namespace: argocd
 spec:
   project: default
 
-  source:
-    repoURL: https://prometheus-community.github.io/helm-charts
-    chart: kube-prometheus-stack
-    targetRevision: 91.4.0
-    helm:
-      releaseName: monitoring
-      valueFiles:
-        - values.yaml
+  sources:
+    - repoURL: https://prometheus-community.github.io/helm-charts
+      chart: kube-prometheus-stack
+      targetRevision: 91.4.0
+      helm:
+        releaseName: monitoring
+        valueFiles:
+          - $values/monitoring/values.yaml
+
+    - repoURL: https://github.com/Syeem007/monitoring.git
+      targetRevision: main
+      ref: values
 
   destination:
     server: https://kubernetes.default.svc
