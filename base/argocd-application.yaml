@@ -14,7 +14,7 @@ spec:
       helm:
         releaseName: monitoring
         valueFiles:
-          - $values/monitoring/values.yaml
+          - $values/values.yaml
 
     - repoURL: https://github.com/Syeem007/monitoring.git
       targetRevision: main
