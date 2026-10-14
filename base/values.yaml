@@ -72,3 +72,26 @@ prometheusOperator:
       memory: 128Mi
     limits:
       memory: 512Mi
+
+grafana:
+  envFromSecret: grafana-oidc
+
+  grafana.ini:
+    server:
+      root_url: http://grafana.home.arpa
+
+    auth.generic_oauth:
+      enabled: true
+      name: Keycloak
+      allow_sign_up: true
+
+      client_id: grafana
+
+      scopes: openid profile email
+
+      auth_url: https://keycloak.home.arpa/realms/homelab/protocol/openid-connect/auth
+      token_url: https://keycloak.home.arpa/realms/homelab/protocol/openid-connect/token
+      api_url: https://keycloak.home.arpa/realms/homelab/protocol/openid-connect/userinfo
+
+      use_pkce: true
+      role_attribute_path: "'Viewer'"
